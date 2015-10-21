@@ -3,13 +3,19 @@
         <div class="container">
             <div class="navbar-text">
                 <ul id="footer-text">
-                    <li><a href="{{site.baseurl}}/index.html">Home</a></li>
-                    <li><a href="http://jupyter.readthedocs.org/en/latest/install.html">  Install</a></li>
-                    <li><a href="{{site.baseurl}}/about.html">  About</a></li>
-                    <li><a href="http://jupyter.readthedocs.org/en/latest/">  Documentation</a></li>
-                    <li><a href="https://blog.jupyter.org/">  Blog</a></li>
-                    <li><a href="{{site.baseurl}}/donate.html">  Donate</a></li>
-                    <p>Copyright © 2015  Project Jupyter</p>
+                    <li><a href="{{site.baseurl}}">Home</a></li>
+                    {% for nav in site.data.nav.head %}
+                      {% if nav.url %}
+                           <li><a href="{{site.baseurl}}{{nav.url}}" target="_blank">{{nav.title}}</a></li>
+                      {% else %}
+                        {% for ppage in site.pages %}
+                           {% if nav contains ppage.title %}
+                               <li><a href="{{site.baseurl}}{{page.url}}">{{ppage.title}}</a></li>
+                           {% endif %}
+                           {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                    <p>Copyright © {{site.time | date: '%Y' }}  Project Jupyter - Last updated {{site.time | date: "%a, %b %d, %Y" }}</p>
                 </ul>
             </div>
             <div class="follow">
@@ -21,10 +27,10 @@
 </footer>
 
     <!-- jQuery -->
-    <script src="{{site.baseurl}}//js/jquery.js"></script>
+    <script src="{{site.baseurl}}/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="{{site.baseurl}}//js/bootstrap.min.js"></script>
+    <script src="{{site.baseurl}}/js/bootstrap.min.js"></script>
     <!-- Place this tag right after the last button or just before your close body tag. -->
     <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
     <script src="{{site.baseurl}}/js/scroll.js"></script>

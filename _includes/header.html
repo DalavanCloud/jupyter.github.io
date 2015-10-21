@@ -10,13 +10,34 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" href="{{site.baseurl}}/index.html">
-                    <img src="{{site.baseurl}}//assets/nav_logo.svg" style="height:45px;">
+                    <img src="{{site.baseurl}}/assets/nav_logo.svg" style="height:45px;">
                 </a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
+                    {% for nav in site.data.nav.head %}
+                      {% if nav.url %}
+                           <li>
+                             <a href="{{nav.url}}" class="tab" id="tab" target="_blank">{{nav.title | upcase}}</a>
+                           </li>
+                      {% else %}
+                        {% for targetpage in site.pages %}
+                           {% if nav contains targetpage.title%}
+                              {% if page.title == targetpage.title %}
+                               <li>
+                                   <a href  class="tab navbar-active" id="tab">{{targetpage.title| upcase}}</a>
+                               </li>
+                               {% else %}
+                               <li>
+                                   <a href="{{targetpage.url}}" class="tab" id="tab">{{targetpage.title| upcase}}</a>
+                               </li>
+                               {% endif %}
+                           {% endif %}
+                           {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                    <!--<li>
                         <a href="http://jupyter.readthedocs.org/en/latest/install.html" class="tab" id="tab" target="_blank">INSTALL</a>
                     </li>
                     <li>
@@ -31,6 +52,7 @@
                     <li>
                         <a href="{{site.baseurl}}/donate.html" class="tab">DONATE</a>
                     </li>
+                    -->
                    <!-- <li>
                         <a href="#" class="tab" id="tab">DONATE</a>
                     </li> -->
@@ -41,14 +63,3 @@
         <!-- /.container -->
     </div>
 </nav>  
-{% if false %} 
-<!--<div class="trigger">
-    {% for page in site.pages %}
-      {% if page.title %}
-      <a class="page-link" href="{{ page.url | prepend: site.baseurl }}">{{ page.title }}</a>
-      {% endif %}
-    {% endfor %}
-  </div>
-</nav>
--->
-{% endif %}
