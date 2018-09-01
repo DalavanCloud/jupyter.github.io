@@ -24,7 +24,8 @@ install:
 
 script:
  -|
-   if [ "$SPELL" = "1" ]; then
+   if [ "$SPELL" = "1" ]
+   then
      codespell -q3 --skip='.git,*.svg,*.json,*.yml,*.lock,_site'
    else
      bash .travis/cibuild
