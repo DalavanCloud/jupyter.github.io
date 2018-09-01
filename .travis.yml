@@ -8,6 +8,8 @@ matrix:
   include:
     - python: 3
       env: SPELL=1
+    - rvm: 2.2
+      env: SPELL=0
 
 
 before_install:
