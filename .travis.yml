@@ -17,7 +17,8 @@ before_install:
 
 install:
  - |
-   if [ "$SPELL"= "1" ]; then
+   if [ "$SPELL" = "1" ]
+   then
      pip install codespell --user
    else
      npm install -g csslint
